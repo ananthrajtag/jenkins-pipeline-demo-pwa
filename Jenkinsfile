@@ -50,7 +50,7 @@ pipeline {
         stage("Initialize") {
             steps {
                 script {
-                    notifyBuild('STARTED')
+                    //notifyBuild('STARTED')
                     echo "${BUILD_NUMBER} - ${env.BUILD_ID} on ${env.JENKINS_URL}"
                     echo "Branch Specifier :: ${params.SPECIFIER}"
                     echo "Deploy to QA? :: ${params.DEPLOY_QA}"

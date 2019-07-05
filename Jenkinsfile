@@ -10,12 +10,12 @@ pipeline {
         registryCredentialsId 'sivisoft:Pass123!@#'
         args '-v /home/centos/.ivy2:/home/jenkins/.ivy2:rw -v jenkins_opt:/usr/local/bin/opt -v jenkins_apijenkins:/home/jenkins/config -v jenkins_logs:/var/logs -v jenkins_awsconfig:/home/jenkins/.aws --privileged=true -u jenkins:jenkins'
       } */
-      
+      agent { label 'LINUX' }
         //image 'jenkinsslave:latest'
-        label 'LINUX'
-        registryUrl 'https://hub.docker.com/'
-        registryCredentialsId 'sivisoft:Pass123!@#'
-        args '-v /home/centos/.ivy2:/home/jenkins/.ivy2:rw -v jenkins_opt:/usr/local/bin/opt -v jenkins_apijenkins:/home/jenkins/config -v jenkins_logs:/var/logs -v jenkins_awsconfig:/home/jenkins/.aws --privileged=true -u jenkins:jenkins'
+       // label 'LINUX'
+       // registryUrl 'https://hub.docker.com/'
+       // registryCredentialsId 'sivisoft:Pass123!@#'
+        //args '-v /home/centos/.ivy2:/home/jenkins/.ivy2:rw -v jenkins_opt:/usr/local/bin/opt -v jenkins_apijenkins:/home/jenkins/config -v jenkins_logs:/var/logs -v jenkins_awsconfig:/home/jenkins/.aws --privileged=true -u jenkins:jenkins'
       
     }
     environment {

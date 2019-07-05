@@ -152,7 +152,9 @@ pipeline {
          */
         always {
             echo "I AM ALWAYS first"
-            notifyBuild("${currentBuild.currentResult}")
+           echo 'One way or another, I have finished' 
+            deleteDir() /* clean up our workspace */ 
+            //notifyBuild("${currentBuild.currentResult}")
         }
         aborted {
             echo "BUILD ABORTED"

@@ -71,7 +71,7 @@ pipeline {
             steps {
                 sh 'npm install'
                 sh 'ng lint'
-                sh 'ng build --prod'
+                //sh 'ng build --prod'
             }
         }
         stage('Static Code Coverage Analysis') {

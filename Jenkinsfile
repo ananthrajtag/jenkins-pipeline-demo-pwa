@@ -22,7 +22,8 @@ pipeline {
         APP_NAME = 'jenkins-pipeline-demo-pwa'
         BUILD_NUMBER = "${env.BUILD_NUMBER}"
         IMAGE_VERSION="v_${BUILD_NUMBER}"
-        GIT_URL="git@github.yourdomain.com:mpatel/${APP_NAME}.git"
+        //GIT_URL="git@github.yourdomain.com:mpatel/${APP_NAME}.git"
+        GIT_URL="https://github.com/ananthrajtag/${APP_NAME}.git"
         GIT_CRED_ID='github_ananthraj'
         REPOURL = 'sivisoft'
         SBT_OPTS='-Xmx1024m -Xms512m'

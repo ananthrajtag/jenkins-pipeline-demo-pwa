@@ -75,6 +75,8 @@ pipeline {
                 //sh 'ng build --prod'
             }
         }
+      
+      /*
         stage('Static Code Coverage Analysis') {
             parallel {
               stage('Execute Whitesource Analysis') {
@@ -97,6 +99,74 @@ pipeline {
               }
             }
         }
+      
+      */
+      //Publish report
+      
+      stage('Publish Reports') {
+    parallel {
+        stage('Publish FindBugs Report') {
+            steps {
+                step([$class: 'FindBugsPublisher', canComputeNew: false, defaultEncoding: '', excludePattern: '', healthy: '', includePattern: '', pattern: 'target/scala-2.11/findbugs/report.xml', unHealthy: ''])
+            }
+        }
+        stage('Publish Junit Report') {
+            steps {
+                junit allowEmptyResults: true, testResults: 'target/test-reports/*.xml'
+            }
+        }
+        stage('Publish Junit HTML Report') {
+            steps {
+                publishHTML target: [
+                        allowMissing: true,
+                        alwaysLinkToLastBuild: false,
+                        keepAll: true,
+                        reportDir: 'target/reports/html',
+                        reportFiles: 'index.html',
+                        reportName: 'Test Suite HTML Report'
+                ]
+            }
+        }
+        stage('Publish Coverage HTML Report') {
+            steps {
+                publishHTML target: [
+                        allowMissing: true,
+                        alwaysLinkToLastBuild: false,
+                        keepAll: true,
+                        reportDir: 'target/scala-2.11/scoverage-report',
+                        reportFiles: 'index.html',
+                        reportName: 'Code Coverage'
+                ]
+            }
+        }
+        stage('Execute Whitesource Analysis') {
+            steps {
+                whitesource jobApiToken: '', jobCheckPolicies: 'global', jobForceUpdate: 'global', libExcludes: '', libIncludes: '', product: "${env.WS_PRODUCT_TOKEN}", productVersion: '', projectToken: "${env.WS_PROJECT_TOKEN}", requesterEmail: ''
+            }
+        }
+        stage('SonarQube analysis') {
+                  steps {
+                     script {
+                     // sh "/usr/bin/sonar-scanner -X"
+                    def scannerHome = tool('SonarQube')
+                    withSonarQubeEnv {
+			            sh("""
+                    ${scannerHome}/bin/sonar-scanner -X
+                    """)
+                    }
+                     }
+                  }
+              }
+        stage('ArchiveArtifact') {
+            steps {
+                archiveArtifacts '**/target/universal/*.zip'
+            }
+        }
+    }
+}
+      
+      ///
+      /*
          stage('Docker Tag & Push') {
              steps {
                  script {
@@ -113,7 +183,7 @@ pipeline {
                  }
              }
          }
-
+          */
         stage('Deploy - CI') {
             steps {
                 echo "Deploying to CI Environment."

@@ -69,8 +69,9 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh 'npm install'
-                sh 'ng lint'
+              echo 'npm build'
+               // sh 'npm install'
+                //sh 'ng lint'
                 //sh 'ng build --prod'
             }
         }

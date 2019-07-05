@@ -5,7 +5,7 @@ pipeline {
     agent {
       docker {
         image 'jenkinsslave:latest'
-        registryUrl 'http://8598567586.dkr.ecr.us-west-2.amazonaws.com'
+        registryUrl 'https://hub.docker.com/'
         registryCredentialsId 'ecr:us-east-1:3435443545-5546566-567765-3225'
         args '-v /home/centos/.ivy2:/home/jenkins/.ivy2:rw -v jenkins_opt:/usr/local/bin/opt -v jenkins_apijenkins:/home/jenkins/config -v jenkins_logs:/var/logs -v jenkins_awsconfig:/home/jenkins/.aws --privileged=true -u jenkins:jenkins'
       }
@@ -16,7 +16,7 @@ pipeline {
         IMAGE_VERSION="v_${BUILD_NUMBER}"
         GIT_URL="git@github.yourdomain.com:mpatel/${APP_NAME}.git"
         GIT_CRED_ID='izleka2IGSTDK+MiYOG3b3lZU9nYxhiJOrxhlaJ1gAA='
-        REPOURL = 'cL5nSDa+49M.dkr.ecr.us-east-1.amazonaws.com'
+        REPOURL = 'sivisoft'
         SBT_OPTS='-Xmx1024m -Xms512m'
         JAVA_OPTS='-Xmx1024m -Xms512m'
         WS_PRODUCT_TOKEN='FJbep9fKLeJa/Cwh7IJbL0lPfdYg7q4zxvALAxWPLnc='
@@ -74,7 +74,7 @@ pipeline {
               }
               stage('SonarQube analysis') {
                   steps {
-                      sh "/usr/bin/sonar-scanner"
+                      sh "/usr/bin/sonar-scanner -X"
                   }
               }
             }

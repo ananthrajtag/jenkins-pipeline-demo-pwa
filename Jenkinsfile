@@ -6,7 +6,7 @@ pipeline {
       docker {
         image 'jenkinsslave:latest'
         registryUrl 'https://hub.docker.com/'
-        registryCredentialsId 'ecr:us-east-1:3435443545-5546566-567765-3225'
+        registryCredentialsId 'sivisoft:Pass123!@#'
         args '-v /home/centos/.ivy2:/home/jenkins/.ivy2:rw -v jenkins_opt:/usr/local/bin/opt -v jenkins_apijenkins:/home/jenkins/config -v jenkins_logs:/var/logs -v jenkins_awsconfig:/home/jenkins/.aws --privileged=true -u jenkins:jenkins'
       }
     }
@@ -15,7 +15,7 @@ pipeline {
         BUILD_NUMBER = "${env.BUILD_NUMBER}"
         IMAGE_VERSION="v_${BUILD_NUMBER}"
         GIT_URL="git@github.yourdomain.com:mpatel/${APP_NAME}.git"
-        GIT_CRED_ID='izleka2IGSTDK+MiYOG3b3lZU9nYxhiJOrxhlaJ1gAA='
+        GIT_CRED_ID='github_ananthraj'
         REPOURL = 'sivisoft'
         SBT_OPTS='-Xmx1024m -Xms512m'
         JAVA_OPTS='-Xmx1024m -Xms512m'
